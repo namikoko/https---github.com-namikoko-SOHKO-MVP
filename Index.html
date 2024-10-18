@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOHKO Interactive Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Remjoo:wght@400&display=swap" />
+    <link rel="stylesheet" href="Style.css" />
+</head>
+<body>
+
+   <!-- First Section: SOHKO -->
+<div class="section sohko-section">
+    <span class="text">SOHKO</span>
+    <div class="wrapper">
+        <a href="#abyss-section" class="text-2">STORY</a>
+        <a href="#gallery-section" class="text-3">GALLERY</a>
+        <a href="#sound-section" class="text-4">SOUND</a>
+    </div>
+</div>
+
+
+    <!-- Second Section: Beware of the Abyss -->
+    <div id="abyss-section" class="section abyss-section">
+        <div class="abyss-content">
+            <h1 class="beware">BEWARE</h1>
+            <h2 class="of-the">OF THE</h2>
+            <h1 class="abyss">ABYSS</h1>
+        </div>
+    </div>
+
+    <!-- Third Section: Story -->
+    <div id="story-section" class="section story-section">
+        <div class="story-content">
+            <h1 class="story-title">STORY</h1>
+            <div class="story-images">
+                <img src="./Images/_ (57).jpeg" alt="Story Image" class="story-img-large">
+                <img src="./Images/_ (57).jpeg" alt="Story Image" class="story-img-small">
+            </div>
+            <div class="story-text">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Animations -->
+    <script>
+        // 3D Mouse Parallax for SOHKO
+        const text = document.querySelector('.text');
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            text.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        document.addEventListener('mouseleave', () => {
+            text.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+        });
+
+        // Scroll Animation for "Beware of the Abyss"
+        const abyssContent = document.querySelector('.abyss-content');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.boundingClientRect.top > 0) {
+                        abyssContent.classList.add('animate-forward');
+                        abyssContent.classList.remove('animate-reverse');
+                    } else {
+                        abyssContent.classList.add('animate-reverse');
+                        abyssContent.classList.remove('animate-forward');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.3,  // Trigger when 30% of the section is visible
+        });
+        observer.observe(document.querySelector('#abyss-section'));
+    </script>
+
+<!-- Fourth Section: Gallery -->
+<div id="gallery-section" class="section gallery-section">
+    <div class="main-container">
+        <div class="group">
+            <span class="text">Gallery</span>
+            <span class="text-2">Title 1</span>
+            <span class="text-3">Title 2</span>
+            <span class="text-4">Title 3</span>
+            <span class="text-5">Title 4</span>
+        </div>
+        <div class="gallery-images">
+            <img src="./Images/_ (57).jpeg" alt="Story Image" class="gallery-img">
+            <img src="./Images/_ (57).jpeg" alt="Story Image" class="gallery-img">
+            <img src="./Images/_ (57).jpeg" alt="Story Image" class="gallery-img">
+            <img src="./Images/_ (57).jpeg" alt="Story Image" class="gallery-img">
+        </div>
+    </div>
+</div>
+<!-- Sound Section -->
+<div id="sound-section" class="section sound-section">
+    <div class="sound-content">
+        <div class="player-wrapper">
+            <span class="song-title">SONG TITLE</span>
+            <div class="album-cover">
+                <img src="./Images/_ (57).jpeg" alt="Album Cover">
+            </div>
+            <div class="controls">
+                <img src="./Images/Group 6.svg" alt="Previous" id="prev">
+                <img src="./Images/Group 2.svg" alt="Play/Pause" id="play-pause">
+                <img src="./Images/Group 5.svg" alt="Next" id="next">
+            </div>
+        </div>
+        <div class="vinyl-record">
+            <img src="./Images/vinyl transparent.png" alt="Vinyl Record" id="vinyl">
+        </div>
+    </div>
+    <span class="sound-title-background">SOUND</span>
+</div>
+<script>
+    const playPauseBtn = document.getElementById('play-pause');
+    const vinyl = document.getElementById('vinyl');
+    let isPlaying = false;
+
+    playPauseBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            vinyl.style.animationPlayState = 'paused';
+            playPauseBtn.src = './Images/Group 2.svg'; // Update to play icon
+        } else {
+            vinyl.style.animationPlayState = 'running';
+            playPauseBtn.src = './Images/Group 6.svg'; // Update to pause icon
+        }
+        isPlaying = !isPlaying;
+    });
+</script>
